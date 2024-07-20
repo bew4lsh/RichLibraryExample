@@ -8,18 +8,45 @@ from readchar import readchar, key  # For reading single characters and special 
 # Create a dictionary with example data
 # This dictionary will be used to populate the table
 data = {
-    "Field1": {"value": "Value1", "description": "This is a detailed description of Field1"},
-    "Field2": {"value": "Value2", "description": "This is a detailed description of Field2"},
-    "Field3": {"value": "Value3", "description": "This is a detailed description of Field3"},
-    "Field4": {"value": "Value4", "description": "This is a detailed description of Field4"},
-    "Field5": {"value": "Value5", "description": "This is a detailed description of Field5"},
-    "Field6": {"value": "Value6", "description": "This is a detailed description of Field6"},
-    "Field7": {"value": "Value7", "description": "This is a detailed description of Field7"},
+    "Field1": {
+        "value": "Value1",
+        "description": "This is a detailed description of Field1",
+    },
+    "Field2": {
+        "value": "Value2",
+        "description": "This is a detailed description of Field2",
+    },
+    "Field3": {
+        "value": "Value3",
+        "description": "This is a detailed description of Field3",
+    },
+    "Field4": {
+        "value": "Value4",
+        "description": "This is a detailed description of Field4",
+    },
+    "Field5": {
+        "value": "Value5",
+        "description": "This is a detailed description of Field5",
+    },
+    "Field6": {
+        "value": "Value6",
+        "description": "This is a detailed description of Field6",
+    },
+    "Field7": {
+        "value": "Value7",
+        "description": "This is a detailed description of Field7",
+    },
 }
+
 
 def display_details(field, details):
     """Display detailed information about a selected field."""
-    console.print(Panel(f"[bold]{field}[/bold]\n\nValue: {details['value']}\n\nDescription: {details['description']}"))
+    console.print(
+        Panel(
+            f"[bold]{field}[/bold]\n\nValue: {details['value']}\n\nDescription: {details['description']}"
+        )
+    )
+
 
 def interactive_select(options):
     """Interactively select an option from the given list."""
@@ -32,14 +59,15 @@ def interactive_select(options):
                 console.print(f"→ {option}", style=Style(color="green", bold=True))
             else:
                 console.print(f"  {option}")
-        
+
         char = readchar()
         if char == key.UP and selected > 0:
             selected -= 1
         elif char == key.DOWN and selected < len(options) - 1:
             selected += 1
-        elif char in (key.ENTER, '\r', '\n'):
+        elif char in (key.ENTER, "\r", "\n"):
             return options[selected]
+
 
 # Create a table object with a title
 table = Table(title="Example Rich Table")
@@ -53,7 +81,7 @@ table.add_column("Value", style="magenta")
 # Iterate through the dictionary items
 for field, details in data.items():
     # Add each key-value pair as a row in the table
-    table.add_row(field, details['value'])
+    table.add_row(field, details["value"])
 
 # Create a console object for rich text output
 console = Console()
