@@ -61,11 +61,14 @@ def interactive_select(options):
                 console.print(f"  {option}")
 
         char = readchar()
-        if char == key.UP and selected > 0:
-            selected -= 1
-        elif char == key.DOWN and selected < len(options) - 1:
-            selected += 1
-        elif char in (key.ENTER, "\r", "\n"):
+        if char == '\x1b':
+            next1, next2 = readchar(), readchar()
+            if next1 == '[':
+                if next2 == 'A':  # Up arrow
+                    selected = max(0, selected - 1)
+                elif next2 == 'B':  # Down arrow
+                    selected = min(len(options) - 1, selected + 1)
+        elif char in (key.ENTER, '\r', '\n'):
             return options[selected]
 
 
