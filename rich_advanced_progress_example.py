@@ -15,6 +15,24 @@ from rich.console import Console
 import time
 import random
 
+def advanced_progress_example():
+    with Progress(
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TaskProgressColumn(),
+        TimeElapsedColumn(),
+        TimeRemainingColumn(),
+    ) as progress:
+        task1 = progress.add_task("[red]Downloading...", total=1000)
+        task2 = progress.add_task("[green]Processing...", total=1000)
+        task3 = progress.add_task("[blue]Uploading...", total=1000)
+
+        while not progress.finished:
+            progress.update(task1, advance=9)
+            progress.update(task2, advance=5)
+            progress.update(task3, advance=3)
+            time.sleep(0.1)
+
 def spinner_example():
     with Progress(
         SpinnerColumn(),
@@ -81,6 +99,9 @@ def main():
 
     console.print("\n3. Progress Table Example:")
     progress_table_example()
+
+    console.print("\n4. Advanced Progress Bar Example:")
+    advanced_progress_example()
 
 if __name__ == "__main__":
     main()
