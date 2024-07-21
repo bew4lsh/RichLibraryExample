@@ -20,8 +20,8 @@ This repository contains a collection of example scripts demonstrating various f
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/rich-examples.git
-   cd rich-examples
+   git clone https://github.com/RichLibraryExample.git
+   cd RichLibraryExample
    ```
 
 2. Install the required dependencies:
