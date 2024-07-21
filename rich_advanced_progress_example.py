@@ -13,7 +13,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.console import Console
 import time
-import random
+
 
 def advanced_progress_example():
     with Progress(
@@ -33,20 +33,31 @@ def advanced_progress_example():
             progress.update(task3, advance=3)
             time.sleep(0.1)
 
+
 def spinner_example():
+    # Create a progress bar with a spinner and text columns
     with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        transient=True,
+        SpinnerColumn(),  # Spinner column to show a spinning animation
+        TextColumn(
+            "[progress.description]{task.description}"
+        ),  # Text column to display task description
+        transient=True,  # Set transient to True to clear the progress bar after completion
     ) as progress:
+        # Add a task to the progress bar with a description and total steps
         task = progress.add_task("[green]Processing...", total=100)
+        # Update the progress bar until it's finished
         while not progress.finished:
+            # Update the task progress by 0.5 units
             progress.update(task, advance=0.5)
+            # Pause for a short time to simulate processing
             time.sleep(0.1)
 
+
 def track_example():
+    # Loop through a range of 100 values while displaying a custom description
     for value in track(range(100), description="[red]Downloading..."):
         time.sleep(0.05)
+
 
 def progress_table_example():
     console = Console()
@@ -82,10 +93,11 @@ def progress_table_example():
             for job in jobs:
                 if not job_progress.finished:
                     job_progress.update(jobs_tasks[job["name"]], advance=0.5)
-            
+
             completed = sum(task.completed for task in job_progress.tasks)
             overall_progress.update(overall_task, completed=completed / 3)
             time.sleep(0.1)
+
 
 def main():
     console = Console()
@@ -102,6 +114,7 @@ def main():
 
     console.print("\n4. Advanced Progress Bar Example:")
     advanced_progress_example()
+
 
 if __name__ == "__main__":
     main()
